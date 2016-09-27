@@ -27,4 +27,4 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install mbstring mcrypt pdo_mysql curl json intl gd xml zip bz2 opcache \
     && curl -O https://raw.githubusercontent.com/laravel/laravel/master/composer.json \
     && curl -sS https://getcomposer.org/installer | php \
-    && php composer.phar install
+    && php composer.phar install --no-autoloader --no-scripts --no-suggest
