@@ -24,7 +24,10 @@ RUN apt-get update && apt-get install -y \
 	    libsnmp-dev \
 	    libpcre3-dev \
 	    libtidy-dev \
-    && docker-php-ext-install mbstring mcrypt pdo_mysql curl json intl gd xml zip bz2 opcache \
+    && docker-php-ext-install mbstring mcrypt pdo_mysql curl json intl gd xml zip bz2 opcache xdebug \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
+    && php -v \
     && cd ~ \
     && curl -O https://raw.githubusercontent.com/laravel/laravel/master/composer.json \
     && curl -sS https://getcomposer.org/installer | php \
