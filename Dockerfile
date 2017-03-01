@@ -3,9 +3,7 @@ MAINTAINER Huiren Woo <giantcrabby@gmail.com>
 LABEL maintainer="Huiren Woo <giantcrabby@gmail.com>" \
         php="7.1"
 
-RUN apt-get update && apt-get install -y \
-	    git \
-	    libcurl4-gnutls-dev \
+RUN DEV_DEPENDENCIES="libcurl4-gnutls-dev \
 	    libicu-dev \
 	    libmcrypt-dev \
 	    libvpx-dev \
@@ -25,10 +23,16 @@ RUN apt-get update && apt-get install -y \
 	    libaspell-dev \
 	    libsnmp-dev \
 	    libpcre3-dev \
-	    libtidy-dev \
+	    libtidy-dev" \
+    && apt-get update && apt-get install -y \
+	    git \
+	    $DEV_DEPENDENCIES \
     && docker-php-ext-install mbstring mcrypt pdo_mysql curl json intl gd xml zip bz2 opcache \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
+    && apt-get purge -y $DEV_DEPENDENCIES \
+    && apt-get clean \
+    && php -v
     && cd ~ \
     && EXPECTED_SIGNATURE=$(curl -q -sS https://composer.github.io/installer.sig) \
     && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
