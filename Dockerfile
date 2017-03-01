@@ -32,7 +32,7 @@ RUN DEV_DEPENDENCIES="libcurl4-gnutls-dev \
     && docker-php-ext-enable xdebug \
     && apt-get purge -y $DEV_DEPENDENCIES \
     && apt-get clean \
-    && php -v
+    && php -v \
     && cd ~ \
     && EXPECTED_SIGNATURE=$(curl -q -sS https://composer.github.io/installer.sig) \
     && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
