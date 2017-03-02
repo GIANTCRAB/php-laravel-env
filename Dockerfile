@@ -29,7 +29,7 @@ RUN DEV_DEPENDENCIES="build-base \
         pcre-dev" \
     && echo '@community http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
     && apk update && apk upgrade -U -a && apk add \
-        penssh-client \
+        openssh-client \
         git \
         $DEV_DEPENDENCIES \
         tidyhtml-dev@community \
