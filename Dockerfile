@@ -28,9 +28,9 @@ RUN DEV_DEPENDENCIES="build-base \
 	    net-snmp-dev \
 	    pcre-dev \
 	    tidyhtml-dev@community" \
-	&& echo '@community http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
+    && echo '@community http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
     && apk update && apk upgrade -U -a && apk add \
-        openssh-client \
+        penssh-client \
 	    git \
 	    $DEV_DEPENDENCIES \
     && docker-php-ext-install mbstring mcrypt pdo_mysql pdo_pgsql curl json intl gd xml zip bz2 opcache \
