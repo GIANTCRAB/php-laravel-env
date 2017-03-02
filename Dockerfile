@@ -7,32 +7,32 @@ RUN DEV_DEPENDENCIES="build-base \
         autoconf \
         libtool \
         curl-dev \
-	    icu-dev \
-	    libmcrypt-dev \
-	    libvpx-dev \
-	    jpeg-dev \
-	    libpng-dev \
-	    libxpm-dev \
-	    zlib-dev \
-	    freetype-dev \
-	    libxml2-dev \
-	    expat-dev \
-	    bzip2-dev \
-	    gmp-dev \
-	    imap-dev \
-	    openldap-dev \
-	    unixodbc-dev \
-	    postgresql-dev \
-	    sqlite-dev \
-	    aspell-dev \
-	    net-snmp-dev \
-	    pcre-dev \
-	    tidyhtml-dev@community" \
+        icu-dev \
+        libmcrypt-dev \
+        libvpx-dev \
+        jpeg-dev \
+        libpng-dev \
+        libxpm-dev \
+        zlib-dev \
+        freetype-dev \
+        libxml2-dev \
+        expat-dev \
+        bzip2-dev \
+        gmp-dev \
+        imap-dev \
+        openldap-dev \
+        unixodbc-dev \
+        postgresql-dev \
+        sqlite-dev \
+        aspell-dev \
+        net-snmp-dev \
+        pcre-dev \
+        tidyhtml-dev@community" \
     && echo '@community http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
     && apk update && apk upgrade -U -a && apk add \
         penssh-client \
-	    git \
-	    $DEV_DEPENDENCIES \
+        git \
+        $DEV_DEPENDENCIES \
     && docker-php-ext-install mbstring mcrypt pdo_mysql pdo_pgsql curl json intl gd xml zip bz2 opcache \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
