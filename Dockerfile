@@ -3,9 +3,9 @@ MAINTAINER Huiren Woo <giantcrabby@gmail.com>
 LABEL maintainer="Huiren Woo <giantcrabby@gmail.com>" \
         php="7.1"
 
-RUN DEV_DEPENDENCIES="build-base \
-        autoconf \
-        libtool \
+RUN BUILD_DEPENDENCIES="build-base \
+        autoconf" \
+    DEV_DEPENDENCIES="libtool \
         curl-dev \
         icu-dev \
         libmcrypt-dev \
@@ -26,17 +26,18 @@ RUN DEV_DEPENDENCIES="build-base \
         sqlite-dev \
         aspell-dev \
         net-snmp-dev \
+        tidyhtml-dev@community \
         pcre-dev" \
     && echo '@community http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
     && apk update && apk upgrade -U -a && apk add \
         openssh-client \
         git \
+        $BUILD_DEPENDENCIES \
         $DEV_DEPENDENCIES \
-        tidyhtml-dev@community \
     && docker-php-ext-install mbstring mcrypt pdo_mysql pdo_pgsql curl json intl gd xml zip bz2 opcache \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
-    && apk del --purge $DEV_DEPENDENCIES tidyhtml-dev \
+    && apk del --purge $BUILD_DEPENDENCIES \
     && php -v \
     && cd ~ \
     && EXPECTED_SIGNATURE=$(curl -q -sS https://composer.github.io/installer.sig) \
