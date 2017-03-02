@@ -26,24 +26,22 @@ RUN DEV_DEPENDENCIES="build-base \
         sqlite-dev \
         aspell-dev \
         net-snmp-dev \
-        pcre-dev \
-        tidyhtml-dev@community" \
+        pcre-dev" \
     && echo '@community http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
     && apk update && apk upgrade -U -a && apk add \
         penssh-client \
         git \
         $DEV_DEPENDENCIES \
+        tidyhtml-dev@community \
     && docker-php-ext-install mbstring mcrypt pdo_mysql pdo_pgsql curl json intl gd xml zip bz2 opcache \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
-    && apk del $DEV_DEPENDENCIES \
+    && apk del --purge $DEV_DEPENDENCIES tidyhtml-dev \
     && php -v \
     && cd ~ \
     && EXPECTED_SIGNATURE=$(curl -q -sS https://composer.github.io/installer.sig) \
     && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && ACTUAL_SIGNATURE=$(php -r "echo hash_file('SHA384', 'composer-setup.php');") \
-    && echo $EXPECTED_SIGNATURE \
-    && echo $ACTUAL_SIGNATURE \
     && if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]; then >&2 echo 'ERROR: Invalid installer signature' && rm composer-setup.php && exit 1; fi \
     && php composer-setup.php --quiet \
     && RESULT=$? \
