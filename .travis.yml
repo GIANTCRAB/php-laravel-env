@@ -8,4 +8,4 @@ before_install:
   - docker build -t $REPO --build-arg COMMIT=${COMMIT} .
 env:
   global:
-- COMMIT=${TRAVIS_COMMIT::7}
+  - COMMIT=${TRAVIS_COMMIT::7}
