@@ -35,7 +35,7 @@ RUN BUILD_DEPENDENCIES="build-base \
         git \
         $BUILD_DEPENDENCIES \
         $DEV_DEPENDENCIES \
-    && docker-php-ext-install mbstring mcrypt pdo_mysql pdo_pgsql curl json intl gd xml zip bz2 opcache \
+    && docker-php-ext-install mbstring mcrypt pdo_mysql pdo_pgsql curl json intl gd xml zip bz2 opcache bcmath \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
     && apk del --purge $BUILD_DEPENDENCIES \
