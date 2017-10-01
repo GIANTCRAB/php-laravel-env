@@ -1,7 +1,7 @@
-FROM php:7.1-alpine
+FROM php:7.1.10-alpine
 MAINTAINER Giuseppe Trombino <g.trombino@gmail.com>
 LABEL maintainer="Giuseppe Trombino <g.trombino@gmail.com>" \
-        php="7.1"
+        php="7.1.10"
 
 RUN BUILD_DEPENDENCIES="build-base \
         autoconf" \
@@ -31,6 +31,7 @@ RUN BUILD_DEPENDENCIES="build-base \
     && echo '@community http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
     && apk update && apk upgrade -U -a && apk add \
         openssh-client \
+        nodejs-npm \
         nodejs \
         git \
         $BUILD_DEPENDENCIES \
