@@ -31,8 +31,8 @@ RUN BUILD_DEPENDENCIES="build-base \
     && echo '@community http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
     && apk update && apk upgrade -U -a && apk add \
         openssh-client \
-        nodejs-current-8.5.0-r0 \
-        nodejs-current-npm-8.5.0-r0 \  
+        nodejs-current@community \
+        nodejs-current-npm@community \  
         git \
         $BUILD_DEPENDENCIES \
         $DEV_DEPENDENCIES \
