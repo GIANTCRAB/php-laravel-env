@@ -31,7 +31,9 @@ RUN BUILD_DEPENDENCIES="autoconf" \
      	    libpcre3-dev \
     	    libtidy-dev \
     	    openssh-client \
-    	    git" \
+    	    git \
+    	    zip \
+    	    unzip" \
     && docker-php-source extract \
     && apt-get update && apt-get install -y \
         $BUILD_DEPENDENCIES \
