@@ -1,0 +1,16 @@
+sudo: required
+language: generic
+services:
+  - docker
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-ce
+  - docker build -t $DOCKER_USERNAME/$REPO --build-arg COMMIT=${COMMIT} .
+after_success:
+  - docker --version
+  - docker tag $DOCKER_USERNAME/$REPO $DOCKER_USERNAME/$REPO:latest
+  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  - docker push $DOCKER_USERNAME/$REPO
+env:
+  global:
+  - COMMIT=${TRAVIS_COMMIT::7}
