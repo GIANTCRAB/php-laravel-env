@@ -36,7 +36,7 @@ RUN BUILD_DEPENDENCIES="autoconf" \
     && apt-get update && apt-get install -y \
         $BUILD_DEPENDENCIES \
         $DEV_DEPENDENCIES \
-    && docker-php-ext-install mbstring mcrypt pdo_mysql pdo_pgsql curl json intl gd xml zip bz2 opcache \
+    && docker-php-ext-install mbstring mcrypt pdo_mysql pdo_pgsql curl json intl gd xml zip bz2 opcache bcmath soap tidy \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
     && php -v \
