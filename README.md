@@ -1,5 +1,5 @@
 # PHP Laravel Environment
-[![Build Status](https://travis-ci.org/GIANTCRAB/php-laravel-env.svg?branch=master)](https://travis-ci.org/GIANTCRAB/php-laravel-env)
+[![Build Status](https://travis-ci.org/GIANTCRAB/php-laravel-env.svg?branch=5.4)](https://travis-ci.org/GIANTCRAB/php-laravel-env)
 
 Docker environment required to run Laravel
 
