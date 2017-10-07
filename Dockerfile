@@ -51,5 +51,5 @@ RUN BUILD_DEPENDENCIES="build-base \
     && rm composer-setup.php \
     && echo "" >> composer.lock \
     && mkdir vendor \
-    && docker-php-source delete
+    && docker-php-source delete \
     && exit $RESULT
