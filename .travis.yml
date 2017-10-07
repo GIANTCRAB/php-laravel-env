@@ -4,7 +4,7 @@ services:
   - docker
 before_install:
   - sudo apt-get update
-  - sudo apt-get install -o Dpkg::Options::="--force-confold" --allow -y docker-ce
+  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-ce
   - docker build -t $DOCKER_USERNAME/$REPO --build-arg COMMIT=${COMMIT} .
 after_success:
   - docker --version
