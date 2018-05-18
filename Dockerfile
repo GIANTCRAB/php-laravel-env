@@ -15,6 +15,7 @@ RUN BUILD_DEPENDENCIES="autoconf" \
     DEV_DEPENDENCIES="libcurl4-gnutls-dev \
      	    libicu-dev \
      	    libmcrypt-dev \
+     	    libreadline-dev \
      	    libvpx-dev \
      	    libjpeg-dev \
      	    libpng-dev \
@@ -43,7 +44,7 @@ RUN BUILD_DEPENDENCIES="autoconf" \
         $BUILD_DEPENDENCIES \
         $DEV_DEPENDENCIES \
     && docker-php-ext-install mbstring pdo_mysql pdo_pgsql curl json intl gd xml zip bz2 opcache bcmath soap tidy ctype \
-    && pecl install xdebug mcrypt \
+    && pecl install xdebug mcrypt-1.0.1 \
     && docker-php-ext-enable xdebug mcrypt \
     && php -v
 
