@@ -3,13 +3,14 @@ MAINTAINER Huiren Woo <giantcrabby@gmail.com>
 LABEL maintainer="Huiren Woo <giantcrabby@gmail.com>" \
         php="7.1"
 
+# Set Apache work directory
 ENV APACHE_DOCUMENT_ROOT /var/www/html
+WORKDIR APACHE_DOCUMENT_ROOT
 
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # Install Laravel PHP requirements
-
 RUN BUILD_DEPENDENCIES="autoconf" \
     DEV_DEPENDENCIES="libcurl4-gnutls-dev \
      	    libicu-dev \
