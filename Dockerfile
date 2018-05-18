@@ -35,7 +35,8 @@ RUN BUILD_DEPENDENCIES="autoconf" \
     	    openssh-client \
     	    git \
     	    zip \
-    	    unzip" \
+    	    unzip \
+    	    chromedriver" \
     && docker-php-source extract \
     && apt-get update && apt-get install -y \
         $BUILD_DEPENDENCIES \
