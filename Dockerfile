@@ -8,6 +8,8 @@ ENV APACHE_DOCUMENT_ROOT /var/www/html
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
+# Install Laravel PHP requirements
+
 RUN BUILD_DEPENDENCIES="autoconf" \
     DEV_DEPENDENCIES="libcurl4-gnutls-dev \
      	    libicu-dev \
@@ -41,8 +43,10 @@ RUN BUILD_DEPENDENCIES="autoconf" \
     && docker-php-ext-install mbstring mcrypt pdo_mysql pdo_pgsql curl json intl gd xml zip bz2 opcache bcmath soap tidy \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
-    && php -v \
-    && cd ~ \
+    && php -v
+
+# Install composer
+ cd ~ \
     && EXPECTED_SIGNATURE=$(curl -q -sS https://composer.github.io/installer.sig) \
     && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && ACTUAL_SIGNATURE=$(php -r "echo hash_file('SHA384', 'composer-setup.php');") \
