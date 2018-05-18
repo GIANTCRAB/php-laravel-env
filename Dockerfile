@@ -42,9 +42,9 @@ RUN BUILD_DEPENDENCIES="autoconf" \
     && apt-get update && apt-get install -y \
         $BUILD_DEPENDENCIES \
         $DEV_DEPENDENCIES \
-    && docker-php-ext-install mbstring mcrypt pdo_mysql pdo_pgsql curl json intl gd xml zip bz2 opcache bcmath soap tidy ctype \
-    && pecl install xdebug \
-    && docker-php-ext-enable xdebug \
+    && docker-php-ext-install mbstring pdo_mysql pdo_pgsql curl json intl gd xml zip bz2 opcache bcmath soap tidy ctype \
+    && pecl install xdebug mcrypt \
+    && docker-php-ext-enable xdebug mcrypt \
     && php -v
 
 # Install composer
