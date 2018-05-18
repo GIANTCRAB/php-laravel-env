@@ -1,7 +1,7 @@
-FROM php:7.1-apache
+FROM php:7.2-apache-stretch
 MAINTAINER Huiren Woo <giantcrabby@gmail.com>
 LABEL maintainer="Huiren Woo <giantcrabby@gmail.com>" \
-        php="7.1"
+        php="7.2"
 
 # Set Apache work directory
 ENV APACHE_DOCUMENT_ROOT /var/www/html
