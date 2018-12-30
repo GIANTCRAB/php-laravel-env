@@ -13,6 +13,7 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 # Install Laravel PHP requirements
 RUN BUILD_DEPENDENCIES="autoconf" \
     DEV_DEPENDENCIES="libcurl4-gnutls-dev \
+            libzip-dev \
      	    libicu-dev \
      	    libmcrypt-dev \
      	    libreadline-dev \
