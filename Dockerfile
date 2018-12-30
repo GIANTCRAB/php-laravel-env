@@ -44,8 +44,8 @@ RUN BUILD_DEPENDENCIES="autoconf" \
         $BUILD_DEPENDENCIES \
         $DEV_DEPENDENCIES \
     && docker-php-ext-install mbstring pdo_mysql pdo_pgsql curl json intl gd xml zip bz2 opcache bcmath soap tidy ctype \
-    && pecl install xdebug mcrypt-1.0.1 \
-    && docker-php-ext-enable xdebug mcrypt \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
     && php -v
 
 # Install composer
