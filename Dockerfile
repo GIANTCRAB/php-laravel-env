@@ -36,6 +36,7 @@ RUN BUILD_DEPENDENCIES="autoconf" \
      	    libpcre3-dev \
     	    libtidy-dev \
     	    openssh-client \
+    	    iputils-ping \
     	    git \
     	    zip \
     	    unzip \
