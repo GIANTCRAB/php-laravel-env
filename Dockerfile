@@ -48,7 +48,8 @@ RUN BUILD_DEPENDENCIES="autoconf" \
     && docker-php-ext-install mbstring pdo_mysql pdo_pgsql curl json intl gd xml zip bz2 opcache bcmath soap tidy ctype \
     && pecl install xdebug-2.7.0beta1 \
     && docker-php-ext-enable xdebug \
-    && php -v
+    && php -v \
+    && ping -c 3 localhost
 
 # Install composer
 RUN cd ~ \
