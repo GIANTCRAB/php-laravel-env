@@ -1,4 +1,4 @@
-FROM php:7.2-apache_stretch
+FROM php:7.2-apache-stretch
 MAINTAINER Giuseppe Trombino <g.trombino@gmail.com>
 LABEL maintainer="Giuseppe Trombino <g.trombino@gmail.com>" 
 
@@ -36,3 +36,5 @@ RUN mkdir -p database/seeds \
 	--prefer-dist \
 	&& rm -rf composer.json composer.lock \
 	database/ vendor/
+  
+  

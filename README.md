@@ -1,6 +1,6 @@
 # PHP Laravel Environment
-Docker environment required to run Laravel
+[![Build Status](https://travis-ci.org/GIANTCRAB/php-laravel-env.svg?branch=master)](https://travis-ci.org/GIANTCRAB/php-laravel-env)
 
-This is a minimal PHP image required to run Laravel. It also includes xdebug, allowing you to run tests and get your coverage. 
+Docker environment required to run Laravel.
 
-To use it, see [GitLab Docker CI](https://github.com/GIANTCRAB/gitlabby-dockerish-laravel)
+This is a PHP production image required to run Laravel. It also includes xdebug, allowing you to run tests and get your coverage. To use it, see [GitLab Docker CI](https://github.com/GIANTCRAB/gitlabby-dockerish-laravel)
