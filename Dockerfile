@@ -1,56 +1,38 @@
-FROM php:7.1.10-alpine
+FROM php:7.2-apache_stretch
 MAINTAINER Giuseppe Trombino <g.trombino@gmail.com>
-LABEL maintainer="Giuseppe Trombino <g.trombino@gmail.com>" \
-        php="7.1.10"
+LABEL maintainer="Giuseppe Trombino <g.trombino@gmail.com>" 
 
-RUN BUILD_DEPENDENCIES="build-base \
-        autoconf" \
-    DEV_DEPENDENCIES="libtool \
-        curl-dev \
-        icu-dev \
-        libmcrypt-dev \
-        libvpx-dev \
-        jpeg-dev \
-        libpng-dev \
-        libxpm-dev \
-        zlib-dev \
-        freetype-dev \
-        libxml2-dev \
-        expat-dev \
-        bzip2-dev \
-        gmp-dev \
-        imap-dev \
-        openldap-dev \
-        unixodbc-dev \
-        postgresql-dev \
-        sqlite-dev \
-        aspell-dev \
-        net-snmp-dev \
-        tidyhtml-dev@community \
-        pcre-dev" \
-    && echo '@community http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
-    && apk update && apk upgrade -U -a && apk add \
-        openssh-client \
-        nodejs-current@community \
-        nodejs-current-npm@community \  
-        git \
-        $BUILD_DEPENDENCIES \
-        $DEV_DEPENDENCIES \
-    && docker-php-ext-install mbstring mcrypt pdo_mysql pdo_pgsql curl json intl gd xml zip bz2 opcache bcmath \
-    && pecl install xdebug \
-    && docker-php-ext-enable xdebug \
-    && apk del --purge $BUILD_DEPENDENCIES \
-    && php -v \
-    && git --version \
-    && cd ~ \
-    && curl -O https://raw.githubusercontent.com/laravel/laravel/master/composer.json \
-    && EXPECTED_SIGNATURE=$(curl -q -sS https://composer.github.io/installer.sig) \
-    && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && ACTUAL_SIGNATURE=$(php -r "echo hash_file('SHA384', 'composer-setup.php');") \
-    && if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]; then >&2 echo 'ERROR: Invalid installer signature' && rm composer-setup.php && exit 1; fi \
-    && php composer-setup.php --quiet --install-dir=/usr/local/bin --filename=composer \
-    && RESULT=$? \
-    && rm composer-setup.php \
-    && composer --version \
-    && composer install --no-autoloader --no-scripts --no-suggest \
-    && exit $RESULT
+#Install PHP Extensions
+RUN docker-php-ext-install pdo_mysql opcache \
+	&& pecl install xdebug-2.6.1 \
+	&& docker-php-ext-enable xdebug \
+	&& a2enmod rewrite negotiation
+
+#Install composer
+COPY docker/composer/composer-installer.sh /usr/local/bin/composer-installer
+RUN apt-get -yqq update \
+	&& apt-get -yqq install --no-install-recommends zip unzip git \
+	&& chmod +x /usr/local/bin/composer-installer \
+	&& composer-installer \
+	&& mv composer.phar /usr/local/bin/composer \
+	&& chmod +x /usr/local/bin/composer \
+	&& rm /usr/local/bin/composer-installer \
+	&& composer --version
+
+COPY docker/php/php.ini /usr/local/etc/php/
+COPY docker/apache/vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY docker/php/xdebug-dev.ini /usr/local/etc/php/conf.d/xdebug-dev.ini
+
+# Cache Composer dependencies
+WORKDIR /tmp
+ADD composer.json composer.lock /tmp/
+
+RUN mkdir -p database/seeds \
+	mkdir -p database/factories \
+	&& composer install \
+	--no-interaction \
+	--no-plugins \
+	--no-scripts \
+	--prefer-dist \
+	&& rm -rf composer.json composer.lock \
+	database/ vendor/
