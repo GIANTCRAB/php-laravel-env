@@ -1,7 +1,7 @@
-FROM php:7.3-apache-stretch
+FROM php:8.0-apache-bulleye
 MAINTAINER Huiren Woo <giantcrabby@gmail.com>
 LABEL maintainer="Huiren Woo <giantcrabby@gmail.com>" \
-        php="7.3"
+        php="8.0"
 
 # Set Apache work directory
 ENV APACHE_DOCUMENT_ROOT /var/www/html
@@ -15,7 +15,6 @@ RUN BUILD_DEPENDENCIES="autoconf" \
     DEV_DEPENDENCIES="libcurl4-gnutls-dev \
             libzip-dev \
      	    libicu-dev \
-     	    libmcrypt-dev \
      	    libreadline-dev \
      	    libvpx-dev \
      	    libjpeg-dev \
@@ -46,8 +45,9 @@ RUN BUILD_DEPENDENCIES="autoconf" \
         $BUILD_DEPENDENCIES \
         $DEV_DEPENDENCIES \
     && docker-php-ext-install mbstring pdo_mysql pdo_pgsql curl json intl exif gd xml zip bz2 opcache bcmath soap tidy ctype \
-    && pecl install xdebug-2.7.0beta1 \
-    && docker-php-ext-enable xdebug \
+    && pecl install xdebug-3.0.4 \
+    && pecl install redis-5.3.4 \
+    && docker-php-ext-enable xdebug redis \
     && php -v \
     && ping -c 3 localhost
 
