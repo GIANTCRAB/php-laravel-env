@@ -1,4 +1,4 @@
-FROM php:8.0-apache-bulleye
+FROM php:8.0-apache-bullseye
 MAINTAINER Huiren Woo <giantcrabby@gmail.com>
 LABEL maintainer="Huiren Woo <giantcrabby@gmail.com>" \
         php="8.0"
