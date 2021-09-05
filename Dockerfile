@@ -39,7 +39,7 @@ RUN BUILD_DEPENDENCIES="autoconf" \
     	    git \
     	    zip \
     	    unzip \
-    	    chromedriver" \
+    	    chromium-driver" \
     && docker-php-source extract \
     && apt-get update && apt-get install -y \
         $BUILD_DEPENDENCIES \
