@@ -34,7 +34,6 @@ RUN BUILD_DEPENDENCIES="autoconf" \
      	    libsnmp-dev \
      	    libpcre3-dev \
     	    libtidy-dev \
-            libonig-dev \
     	    openssh-client \
     	    iputils-ping \
     	    git \
@@ -45,10 +44,7 @@ RUN BUILD_DEPENDENCIES="autoconf" \
     && apt-get update && apt-get install -y \
         $BUILD_DEPENDENCIES \
         $DEV_DEPENDENCIES \
-    && docker-php-ext-install mbstring pdo_mysql pdo_pgsql curl json intl exif gd xml zip bz2 opcache bcmath soap tidy ctype \
-    && pecl install xdebug-3.0.4 \
-    && pecl install redis-5.3.4 \
-    && docker-php-ext-enable xdebug redis \
+    && docker-php-ext-install pdo_mysql pdo_pgsql intl exif gd zip bz2 opcache bcmath soap tidy xdebug redis \
     && php -v \
     && ping -c 3 localhost
 
