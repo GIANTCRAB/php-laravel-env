@@ -34,6 +34,7 @@ RUN BUILD_DEPENDENCIES="autoconf" \
      	    libsnmp-dev \
      	    libpcre3-dev \
     	    libtidy-dev \
+            libonig-dev \
     	    openssh-client \
     	    iputils-ping \
     	    git \
