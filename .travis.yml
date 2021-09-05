@@ -5,6 +5,7 @@ services:
 before_install:
   - sudo apt-get update
   - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-ce
+  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   - docker build -t $DOCKER_USERNAME/$REPO --build-arg COMMIT=${COMMIT} .
 after_success:
   - docker --version
