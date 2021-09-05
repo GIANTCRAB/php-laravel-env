@@ -2,9 +2,9 @@ name: Laravel Container Build
 
 on:
   push:
-    branches: [ master ]
+    branches: [ "8.0" ]
   pull_request:
-    branches: [ master ]
+    branches: [ "8.0" ]
 
 jobs:
   docker:
